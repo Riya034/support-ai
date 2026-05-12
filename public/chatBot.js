@@ -164,16 +164,21 @@ sendBtn.onclick=async ()=>{
             ownerId,message:text
         })
     })
+    const data = await response.json()
 
-    const data=await response.json()
-    messageArea.removeChild(typing)
-    addMessage(data|| "something went wrong","ai")
+messageArea.removeChild(typing)
+
+addMessage(
+  data.reply || data.message || JSON.stringify(data),
+  "ai"
+)
+    
 
 } catch (error) {
     console.log(error)
     messageArea.removeChild(typing)
-    addMessage(data|| "something went wrong","ai")
-}
+    addMessage("Something went wrong","ai")
+} 
 }
 
 
